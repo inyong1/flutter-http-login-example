@@ -31,9 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () => context.read<UserBloc>().deleteUser(),
                 child: Text("LOGOUT")),
             BlocConsumer<UserBloc, DataState<User?>>(
-              builder: (context, state) {
-                return Text("user:\n${state.data?.toString()}");
-              },
               listener: (context, state) {
                 print("UserBlocListener: state: $state");
                 if (state is DataStateError) {
@@ -42,6 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
               listenWhen: (previous, current) => current != previous,
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 200,
+                      child: Image.network(state.data?.pict ?? ""),
+                    ),
+                    Text("user:\n${state.data?.toString()}"),
+                  ],
+                );
+              },
             )
           ],
         ),
