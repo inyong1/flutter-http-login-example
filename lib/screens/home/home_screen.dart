@@ -1,6 +1,7 @@
 import 'package:eproconnect/blocs/user_bloc.dart';
 import 'package:eproconnect/models/user.dart';
 import 'package:eproconnect/screens/login/login_screen.dart';
+import 'package:eproconnect/screens/pelatihan/pelatihan_screen.dart';
 import 'package:eproconnect/states/data_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
                 onPressed: () => context.read<UserBloc>().deleteUser(),
                 child: Text("LOGOUT")),
+            ElevatedButton(
+              child: Text("Daftar Pelatihan"),
+              onPressed: () =>
+                  Navigator.pushNamed(context, PelatihanScreen.routName),
+            ),
             BlocConsumer<UserBloc, DataState<User?>>(
               listener: (context, state) {
                 print("UserBlocListener: state: $state");

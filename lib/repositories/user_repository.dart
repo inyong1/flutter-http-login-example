@@ -42,6 +42,11 @@ class UserRepository {
     return StorageService().getUser();
   }
 
+  Future<String> getUserToken() async {
+    final User? user = await getUser();
+    return user?.token ?? "";
+  }
+
   Future<void> deleteUser() {
     return StorageService().deleteUser();
   }
